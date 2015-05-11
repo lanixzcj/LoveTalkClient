@@ -1,0 +1,128 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <include layout="@layout/base_header_layout" />
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/nolove" >
+         <TextView
+        android:id="@+id/txt_lover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="暗恋状态"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/txt_loveStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_lover"
+        android:layout_centerHorizontal="true"
+        android:text=""
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/edit_loverPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_loveStatus"
+        android:layout_centerHorizontal="true"
+        android:hint="输入你爱的人的手机哦"
+        android:inputType="phone"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/edit_loverName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_loverPhone"
+        android:layout_centerHorizontal="true"
+        android:hint="他/她的名字"
+        android:inputType="text"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btn_bind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_loverName"
+        android:layout_centerHorizontal="true"
+        android:text="暗恋绑定"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/txt_statusWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/btn_bind"
+        android:layout_marginLeft="10dp"
+        android:text=""
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/btn_myBlog"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/mybook" />
+
+    <Button
+        android:id="@+id/btn_itsBlog"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/itsbook" />
+
+    <Button
+        android:id="@+id/btn_toSay"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_above="@id/btn_myBlog"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/book"
+        android:text=" 写    下"
+        android:textSize="14dp" />
+
+    <Button
+        android:id="@+id/changeLove"
+        android:layout_width="50dp"
+        android:layout_height="100dp"
+        android:layout_alignParentRight="true"
+        android:text="解除暗恋"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/edit_blog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/btn_toSay"
+        android:layout_below="@id/txt_statusWord"
+        android:hint="写下你的暗恋日志" />
+
+    <ImageView
+        android:id="@+id/img_arrow"
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:layout_above="@id/btn_itsBlog"
+        android:layout_alignLeft="@id/btn_itsBlog"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/arrowanother"
+        android:visibility="invisible" />
+    </RelativeLayout>
+
+   
+
+</LinearLayout>

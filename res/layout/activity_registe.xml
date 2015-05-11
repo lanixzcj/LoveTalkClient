@@ -1,0 +1,197 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/registebg" >
+	
+    <LinearLayout
+	    android:layout_width="0px"
+	    android:layout_height="0px"
+	    android:focusable="true"
+	    android:focusableInTouchMode="true" />
+    
+    <ImageView
+        android:id="@+id/join"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/join" />
+	
+    <LinearLayout
+        android:id="@+id/user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/join"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/usernameicon" />
+
+        <EditText
+            android:id="@+id/usernametext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:inputType="textEmailAddress"
+            android:textSize="12sp"
+            android:background="@drawable/registeusername" />
+    </LinearLayout>
+    
+     <LinearLayout
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/registemail" />
+
+        <EditText
+            android:id="@+id/emailtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:inputType="textEmailAddress"
+            android:textSize="12sp"
+            android:background="@drawable/emailtext" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/pass1"
+        android:layout_below="@+id/email"
+        android:layout_alignLeft="@id/email"
+         android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/passicon" />
+
+        <EditText
+            android:id="@+id/passtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:inputType="textPassword"
+            android:background="@drawable/pass" 
+            android:textSize="12sp"
+            android:ems="3"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/pass2"
+        android:layout_below="@+id/email"
+        android:layout_alignRight="@id/email"
+         android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/passicon" />
+
+        <EditText
+            android:id="@+id/pass2text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:inputType="textPassword"
+            android:textSize="12sp"
+            android:background="@drawable/pass2" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/mobile"
+        android:layout_below="@+id/pass1"
+        android:layout_alignLeft="@id/email"
+         android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/mobileicon" />
+
+        <EditText
+            android:id="@+id/mobiletext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:inputType="phone"
+            android:textSize="12sp"
+            android:background="@drawable/mobiletext" />
+    </LinearLayout>
+	
+    <RadioGroup 
+        android:id="@+id/sex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignLeft="@+id/mobile"
+        android:layout_alignRight="@+id/mobile"
+        android:layout_below="@+id/mobile"
+        android:layout_marginTop="30dp">
+        
+        <RadioButton
+        android:id="@+id/male"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:button="@null"
+        android:checked="true"
+        android:background="@drawable/male_radion_button"/>
+        <View 
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            />
+        <RadioButton
+        android:id="@+id/female"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:button="@null"
+        android:background="@drawable/female_radion_button"/>
+    </RadioGroup>
+        
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/sex"
+        android:layout_below="@+id/sex"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/backicon" />
+
+    <ImageView
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/back"
+        android:layout_alignRight="@+id/mobile"
+        android:src="@drawable/next" />
+
+</RelativeLayout>
