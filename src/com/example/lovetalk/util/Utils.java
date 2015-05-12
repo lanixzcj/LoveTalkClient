@@ -94,9 +94,9 @@ public class Utils {
 			final String Address = user.getString("address");
 			if (location == null
 					|| !Utils.doubleEqual(location.getLatitude(),
-							lastLocation.getLatitude())
+					lastLocation.getLatitude())
 					|| !Utils.doubleEqual(location.getLongitude(),
-							lastLocation.getLongitude())) {
+					lastLocation.getLongitude())) {
 				user.put("location", lastLocation);
 				user.put("address", lastaddress);
 				user.saveInBackground(new SaveCallback() {
@@ -119,7 +119,7 @@ public class Utils {
 	}
 
 	public static void handleListResult(XListView listView,
-			BaseListAdapter adapter, List datas) {
+										BaseListAdapter adapter, List datas) {
 		if (Utils.isListNotEmpty(datas)) {
 			adapter.addAll(datas);
 			if (datas.size() == 10) {
@@ -227,7 +227,7 @@ public class Utils {
 	}
 
 	public static void inputToOutput(FileOutputStream outputStream,
-			InputStream inputStream) throws IOException {
+									 InputStream inputStream) throws IOException {
 		byte[] buffer = new byte[1024];
 		int len;
 		while ((len = inputStream.read(buffer)) != -1) {
@@ -248,8 +248,8 @@ public class Utils {
 			}
 		}
 	}
-	
+
 	public static int getColor(int resId) {
-	    return DemoApplication.context.getResources().getColor(resId);
-	  }
+		return DemoApplication.context.getResources().getColor(resId);
+	}
 }

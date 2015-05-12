@@ -66,7 +66,7 @@ public class PreferenceMap {
 	private void setLongitude(String longitude) {
 		editor.putString(LONGITUDE, longitude).commit();
 	}
-	
+
 	public String getAddress() {
 		return pref.getString(ADDRESS, null);
 	}
@@ -74,7 +74,7 @@ public class PreferenceMap {
 	public void setAddress(String address) {
 		editor.putString(ADDRESS, address).commit();
 	}
-	
+
 	public AVGeoPoint getLocation() {
 		String latitudeStr = getLatitude();
 		String longitudeStr = getLongitude();

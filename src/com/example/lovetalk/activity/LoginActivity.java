@@ -22,13 +22,13 @@ public class LoginActivity extends BaseEntryActivity implements OnClickListener,
 	private EditText enterLogin;
 	private EditText enterPassword;
 	private ImageView registebtn, loginbtn, forgetbtn;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_login);
-		
+
 		enterLogin = (EditText) findViewById(R.id.enterlogin);
 		enterPassword = (EditText) findViewById(R.id.enterpassword);
 		registebtn = (ImageView) findViewById(R.id.registebtn);
@@ -46,17 +46,17 @@ public class LoginActivity extends BaseEntryActivity implements OnClickListener,
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
-		case R.id.registebtn:
-			Utils.goActivity(this, RegisteActivity.class);
-			break;
-		case R.id.loginbtn:
+			case R.id.registebtn:
+				Utils.goActivity(this, RegisteActivity.class);
+				break;
+			case R.id.loginbtn:
 //			if (validate()) {
 				login();
 //			}
-			break;
-		case R.id.forget:
-			Utils.goActivity(this, ForgetActivity.class);
-			break;
+				break;
+			case R.id.forget:
+				Utils.goActivity(this, ForgetActivity.class);
+				break;
 		}
 	}
 
@@ -67,17 +67,17 @@ public class LoginActivity extends BaseEntryActivity implements OnClickListener,
 			v.setBackgroundResource(R.drawable.notext);
 		} else {
 			switch (v.getId()) {
-			case R.id.enterlogin:
-				if (isEmpty(enterLogin)) {
-					enterLogin.setBackgroundResource(R.drawable.logintext);
-				}
-				break;
-			case R.id.enterpassword:
-				if (isEmpty(enterPassword)) {
-					enterPassword
-							.setBackgroundResource(R.drawable.passwordtext);
-				}
-				break;
+				case R.id.enterlogin:
+					if (isEmpty(enterLogin)) {
+						enterLogin.setBackgroundResource(R.drawable.logintext);
+					}
+					break;
+				case R.id.enterpassword:
+					if (isEmpty(enterPassword)) {
+						enterPassword
+								.setBackgroundResource(R.drawable.passwordtext);
+					}
+					break;
 			}
 		}
 	}
@@ -90,20 +90,20 @@ public class LoginActivity extends BaseEntryActivity implements OnClickListener,
 	private void login() {
 		final String email = enterLogin.getText().toString();
 		final String pwd = enterPassword.getText().toString();
-		
+
 		new MyAsyncTask(this) {
-			
+
 			@Override
 			protected void onPost(Exception e) {
 				// TODO Auto-generated method stub
-				if(e != null){
-					Utils.toast(context, "登录失败:"+e.getMessage());
-				}else{
+				if (e != null) {
+					Utils.toast(context, "登录失败:" + e.getMessage());
+				} else {
 					Utils.toast(context, "登录成功");
 					Utils.goActivity(context, HomeActivity.class);
 				}
 			}
-			
+
 			@Override
 			protected void doInBack() throws Exception {
 				// TODO Auto-generated method stub

@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class EmotionPagerAdapter extends BasePagerAdapter {
 
-  public EmotionPagerAdapter(List<View> views) {
-    super(views);
-  }
+	public EmotionPagerAdapter(List<View> views) {
+		super(views);
+	}
 }

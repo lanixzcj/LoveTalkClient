@@ -44,27 +44,27 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MeetAdapter extends BaseAdapter{
-	private List<HashMap<String, Object>> MeetList; 
+public class MeetAdapter extends BaseAdapter {
+	private List<HashMap<String, Object>> MeetList;
 	private Context context;
-	public MeetAdapter(Context context, List<HashMap<String, Object>> MeetList){
+
+	public MeetAdapter(Context context, List<HashMap<String, Object>> MeetList) {
 		this.context = context;
-		this.MeetList = MeetList;	
+		this.MeetList = MeetList;
 	}
-	
+
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
 		return MeetList.size();
 	}
-	
-	public static class ViewHolder
-    {
-       public ImageView meet_avatar = null;
-       public TextView meet_times = null;
-       public TextView meet_name = null;
-    }
-	
+
+	public static class ViewHolder {
+		public ImageView meet_avatar = null;
+		public TextView meet_times = null;
+		public TextView meet_name = null;
+	}
+
 	public String getAvatarUrl(AVUser user) {
 		AVFile avatar = user.getAVFile("avatar");
 		if (avatar != null) {
@@ -73,19 +73,19 @@ public class MeetAdapter extends BaseAdapter{
 			return null;
 		}
 	}
-	
+
 	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
 		final Map<String, Object> item = new HashMap<String, Object>();
-		
+
 		AVUser user = (AVUser) MeetList.get(position).get("user");
 		String name = user.getUsername();
 		AVFile avatar = user.getAVFile("avatar");
 		String avatarUrl = getAvatarUrl(user);
 		String times = MeetList.get(position).get("times").toString();
-		times = "相遇"+times+"次";
-		
+		times = "相遇" + times + "次";
+
 		item.put("name", name);
 		item.put("avatar", avatarUrl);
 		item.put("times", times);
@@ -112,14 +112,14 @@ public class MeetAdapter extends BaseAdapter{
 			viewHolder.meet_avatar = (ImageView) convertView.findViewById(R.id.avatar);
 			viewHolder.meet_times = (TextView) convertView.findViewById(R.id.times);
 			viewHolder.meet_name = (TextView) convertView.findViewById(R.id.name);
-			
+
 			convertView.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		final Map<String, Object> map = (Map<String, Object>) getItem(position);
 		viewHolder.meet_avatar.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				AVUser user = (AVUser) MeetList.get(position).get("user");
@@ -132,18 +132,17 @@ public class MeetAdapter extends BaseAdapter{
 		return convertView;
 	}
 
-	private void initItem(Map<String, Object> item,final int position, final ViewHolder viewHolder) 
-	{
-		
+	private void initItem(Map<String, Object> item, final int position, final ViewHolder viewHolder) {
+
 		if (item != null) {
 			viewHolder.meet_times.setText(item.get("times").toString());
 			viewHolder.meet_name.setText(item.get("name").toString());
-			if(item.get("avatar") != null ){
+			if (item.get("avatar") != null) {
 				UserService.displayAvatar(item.get("avatar").toString(), viewHolder.meet_avatar);
 			}
-			
+
 		}
 	}
-	
-	
+
+
 }

@@ -68,10 +68,10 @@ public class UserFriendAdapter extends BaseAdapter implements SectionIndexer {
 
 		AVUser friend = data.get(position);
 		final String name = friend.getUsername();
-		
+
 		final String avatarUrl = getAvatarUrl(friend);
 
-		UserService.displayAvatar(avatarUrl,avatarView);
+		UserService.displayAvatar(avatarUrl, avatarView);
 		nameView.setText(name);
 
 		int section = getSectionForPosition(position);
@@ -88,14 +88,16 @@ public class UserFriendAdapter extends BaseAdapter implements SectionIndexer {
 	public int getSectionForPosition(int position) {
 		return getSortLetters(data.get(position)).charAt(0);
 	}
+
 	public String getAvatarUrl(AVUser user) {
-	    AVFile avatar = user.getAVFile("avatar");
-	    if (avatar != null) {
-	      return avatar.getUrl();
-	    } else {
-	      return null;
-	    }
-	  }
+		AVFile avatar = user.getAVFile("avatar");
+		if (avatar != null) {
+			return avatar.getUrl();
+		} else {
+			return null;
+		}
+	}
+
 	@SuppressLint("DefaultLocale")
 	public int getPositionForSection(int section) {
 		for (int i = 0; i < getCount(); i++) {

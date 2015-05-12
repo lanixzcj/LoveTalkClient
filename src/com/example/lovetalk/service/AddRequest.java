@@ -9,40 +9,40 @@ import com.avos.avoscloud.AVUser;
  */
 @AVClassName("AddRequest")
 public class AddRequest extends AVObject {
-  public static final int STATUS_WAIT = 0;
-  public static final int STATUS_DONE = 1;
+	public static final int STATUS_WAIT = 0;
+	public static final int STATUS_DONE = 1;
 
-  public static final String FROM_USER = "fromUser";
-  public static final String TO_USER = "toUser";
-  public static final String STATUS = "status";
-  //User fromUser;
-  //User toUser;
-  //int status;
+	public static final String FROM_USER = "fromUser";
+	public static final String TO_USER = "toUser";
+	public static final String STATUS = "status";
+	//User fromUser;
+	//User toUser;
+	//int status;
 
-  public AddRequest() {
-  }
+	public AddRequest() {
+	}
 
-  public AVUser getFromUser() {
-    return getAVUser(FROM_USER, AVUser.class);
-  }
+	public AVUser getFromUser() {
+		return getAVUser(FROM_USER, AVUser.class);
+	}
 
-  public void setFromUser(AVUser fromUser) {
-    put(FROM_USER, fromUser);
-  }
+	public void setFromUser(AVUser fromUser) {
+		put(FROM_USER, fromUser);
+	}
 
-  public AVUser getToUser() {
-    return getAVUser(TO_USER, AVUser.class);
-  }
+	public AVUser getToUser() {
+		return getAVUser(TO_USER, AVUser.class);
+	}
 
-  public void setToUser(AVUser toUser) {
-    put(TO_USER, toUser);
-  }
+	public void setToUser(AVUser toUser) {
+		put(TO_USER, toUser);
+	}
 
-  public int getStatus() {
-    return getInt(STATUS);
-  }
+	public int getStatus() {
+		return getInt(STATUS);
+	}
 
-  public void setStatus(int status) {
-    put(STATUS, status);
-  }
+	public void setStatus(int status) {
+		put(STATUS, status);
+	}
 }

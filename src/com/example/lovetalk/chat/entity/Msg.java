@@ -18,269 +18,269 @@ import java.util.List;
  * Created by lzw on 14-8-7.
  */
 public class Msg {
-  public static enum Status {
-    SendStart(0), SendSucceed(1), SendReceived(2),
-    SendFailed(3), HaveRead(4);
+	public static enum Status {
+		SendStart(0), SendSucceed(1), SendReceived(2),
+		SendFailed(3), HaveRead(4);
 
-    int value;
+		int value;
 
-    Status(int value) {
-      this.value = value;
-    }
+		Status(int value) {
+			this.value = value;
+		}
 
-    public int getValue() {
-      return value;
-    }
+		public int getValue() {
+			return value;
+		}
 
-    public static Status fromInt(int i) {
-      return values()[i];
-    }
-  }
+		public static Status fromInt(int i) {
+			return values()[i];
+		}
+	}
 
-  public static enum Type {
-    Text(0), Image(1), Audio(2), Location(3);
-    int value;
+	public static enum Type {
+		Text(0), Image(1), Audio(2), Location(3);
+		int value;
 
-    Type(int value) {
-      this.value = value;
-    }
+		Type(int value) {
+			this.value = value;
+		}
 
-    public int getValue() {
-      return value;
-    }
+		public int getValue() {
+			return value;
+		}
 
-    public static Type fromInt(int i) {
-      return values()[i];
-    }
-  }
+		public static Type fromInt(int i) {
+			return values()[i];
+		}
+	}
 
-  //long timestamp;
-  //String fromPeerId;
-  //List<String> toPeerIds;
-  //isRequestReceipt
-  AVMessage internalMessage;
-  String content;
-  String objectId;
-  String convid;
-
-
-  RoomType roomType = RoomType.Single;
-  Status status = Status.SendStart;
-  Type type = Type.Text;
+	//long timestamp;
+	//String fromPeerId;
+	//List<String> toPeerIds;
+	//isRequestReceipt
+	AVMessage internalMessage;
+	String content;
+	String objectId;
+	String convid;
 
 
-  public Msg() {
-    internalMessage = new AVMessage();
-  }
+	RoomType roomType = RoomType.Single;
+	Status status = Status.SendStart;
+	Type type = Type.Text;
 
-  public AVMessage getInternalMessage() {
-    return internalMessage;
-  }
 
-  public void setInternalMessage(AVMessage internalMessage) {
-    this.internalMessage = internalMessage;
-  }
+	public Msg() {
+		internalMessage = new AVMessage();
+	}
 
-  public String getToPeerId() {
-    List<String> toPeerIds = internalMessage.getToPeerIds();
-    if (toPeerIds != null && toPeerIds.size() > 0) {
-      return toPeerIds.get(0);
-    } else {
-      return convid;
-    }
-  }
+	public AVMessage getInternalMessage() {
+		return internalMessage;
+	}
 
-  private List<String> getToPeerIds() {
-    return internalMessage.getToPeerIds();
-  }
+	public void setInternalMessage(AVMessage internalMessage) {
+		this.internalMessage = internalMessage;
+	}
 
-  public void setToPeerId(String toPeerId) {
-    setToPeerIds(Arrays.asList(toPeerId));
-  }
+	public String getToPeerId() {
+		List<String> toPeerIds = internalMessage.getToPeerIds();
+		if (toPeerIds != null && toPeerIds.size() > 0) {
+			return toPeerIds.get(0);
+		} else {
+			return convid;
+		}
+	}
 
-  private void setToPeerIds(List<String> toPeerIds) {
-    internalMessage.setToPeerIds(toPeerIds);
-  }
+	private List<String> getToPeerIds() {
+		return internalMessage.getToPeerIds();
+	}
 
-  public String getFromPeerId() {
-    return internalMessage.getFromPeerId();
-  }
+	public void setToPeerId(String toPeerId) {
+		setToPeerIds(Arrays.asList(toPeerId));
+	}
 
-  public void setFromPeerId(String fromPeerId) {
-    internalMessage.setFromPeerId(fromPeerId);
-  }
+	private void setToPeerIds(List<String> toPeerIds) {
+		internalMessage.setToPeerIds(toPeerIds);
+	}
 
-  public long getTimestamp() {
-    return internalMessage.getTimestamp();
-  }
+	public String getFromPeerId() {
+		return internalMessage.getFromPeerId();
+	}
 
-  public boolean isRequestReceipt() {
-    return internalMessage.isRequestReceipt();
-  }
+	public void setFromPeerId(String fromPeerId) {
+		internalMessage.setFromPeerId(fromPeerId);
+	}
 
-  public void setRequestReceipt(boolean isRequestReceipt) {
-    internalMessage.setRequestReceipt(isRequestReceipt);
-  }
+	public long getTimestamp() {
+		return internalMessage.getTimestamp();
+	}
 
-  public String getConvid() {
-    return convid;
-  }
+	public boolean isRequestReceipt() {
+		return internalMessage.isRequestReceipt();
+	}
 
-  public void setConvid(String convid) {
-    this.convid = convid;
-  }
+	public void setRequestReceipt(boolean isRequestReceipt) {
+		internalMessage.setRequestReceipt(isRequestReceipt);
+	}
 
-  public RoomType getRoomType() {
-    return roomType;
-  }
+	public String getConvid() {
+		return convid;
+	}
 
-  public void setRoomType(RoomType roomType) {
-    this.roomType = roomType;
-  }
+	public void setConvid(String convid) {
+		this.convid = convid;
+	}
 
-  public Status getStatus() {
-    return status;
-  }
+	public RoomType getRoomType() {
+		return roomType;
+	}
 
-  public void setStatus(Status status) {
-    this.status = status;
-  }
+	public void setRoomType(RoomType roomType) {
+		this.roomType = roomType;
+	}
 
-  public Type getType() {
-    return type;
-  }
+	public Status getStatus() {
+		return status;
+	}
 
-  public void setType(Type type) {
-    this.type = type;
-  }
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 
-  public void setTimestamp(long timestamp) {
-    internalMessage.setTimestamp(timestamp);
-  }
+	public Type getType() {
+		return type;
+	}
 
-  public String getContent() {
-    return content;
-  }
+	public void setType(Type type) {
+		this.type = type;
+	}
 
-  public String getStatusDesc() {
-    if (status == Status.SendStart) {
-      return DemoApplication.context.getString(R.string.sending);
-    } else if (status == Status.SendReceived) {
-      return DemoApplication.context.getString(R.string.received);
-    } else if (status == Status.SendSucceed) {
-      return DemoApplication.context.getString(R.string.sent);
-    } else if (status == Status.SendFailed) {
-      return DemoApplication.context.getString(R.string.failed);
-    } else if (status == Status.HaveRead) {
-      return DemoApplication.context.getString(R.string.haveRead);
-    } else {
-      throw new IllegalArgumentException("unknown status");
-    }
-  }
+	public void setTimestamp(long timestamp) {
+		internalMessage.setTimestamp(timestamp);
+	}
 
-  public void setContent(String content) {
-    this.content = content;
-  }
+	public String getContent() {
+		return content;
+	}
 
-  public String getObjectId() {
-    return objectId;
-  }
+	public String getStatusDesc() {
+		if (status == Status.SendStart) {
+			return DemoApplication.context.getString(R.string.sending);
+		} else if (status == Status.SendReceived) {
+			return DemoApplication.context.getString(R.string.received);
+		} else if (status == Status.SendSucceed) {
+			return DemoApplication.context.getString(R.string.sent);
+		} else if (status == Status.SendFailed) {
+			return DemoApplication.context.getString(R.string.failed);
+		} else if (status == Status.HaveRead) {
+			return DemoApplication.context.getString(R.string.haveRead);
+		} else {
+			throw new IllegalArgumentException("unknown status");
+		}
+	}
 
-  public void setObjectId(String objectId) {
-    this.objectId = objectId;
-  }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-  public boolean isComeMessage() {
-    String fromPeerId = getFromPeerId();
-    return !fromPeerId.equals(ChatService.getSelfId());
-  }
+	public String getObjectId() {
+		return objectId;
+	}
 
-  public String getOtherId() {
-    if (getRoomType() == RoomType.Group) {
-      return getToPeerId();
-    } else {
-      String fromPeerId = getFromPeerId();
-      String selfId = ChatService.getSelfId();
-      if (fromPeerId.equals(selfId)) {
-        return getToPeerId();
-      } else {
-        return fromPeerId;
-      }
-    }
-  }
+	public void setObjectId(String objectId) {
+		this.objectId = objectId;
+	}
 
-  public String getFromName() {
-    String peerId = getFromPeerId();
-    AVUser user = DemoApplication.lookupUser(peerId);
-    return user.getUsername();
-  }
+	public boolean isComeMessage() {
+		String fromPeerId = getFromPeerId();
+		return !fromPeerId.equals(ChatService.getSelfId());
+	}
 
-  public CharSequence getNotifyContent() {
-    switch (type) {
-      case Audio:
-        return DemoApplication.context.getString(R.string.audio);
-      case Text:
-        if (EmotionUtils.haveEmotion(getContent())) {
-          return DemoApplication.context.getString(R.string.emotion);
-        } else {
-          return getContent();
-        }
-      case Image:
-        return DemoApplication.context.getString(R.string.image);
-      case Location:
-        return DemoApplication.context.getString(R.string.position);
-      default:
-        return DemoApplication.context.getString(R.string.newMessage);
-    }
-  }
+	public String getOtherId() {
+		if (getRoomType() == RoomType.Group) {
+			return getToPeerId();
+		} else {
+			String fromPeerId = getFromPeerId();
+			String selfId = ChatService.getSelfId();
+			if (fromPeerId.equals(selfId)) {
+				return getToPeerId();
+			} else {
+				return fromPeerId;
+			}
+		}
+	}
 
-  public static Msg fromAVMessage(AVMessage avMsg) {
-    Msg msg = new Msg();
-    msg.setInternalMessage(avMsg);
-    if (!AVUtils.isBlankString(avMsg.getMessage())) {
-      HashMap<String, Object> params = JSON.parseObject(avMsg.getMessage(), HashMap.class);
-      String objectId = (String) params.get("objectId");
-      String content = (String) params.get("content");
-      Integer typeInt = (Integer) params.get("type");
-      if (objectId == null || content == null ||
-          typeInt == null) {
-        throwNullException();
-      }
-      msg.setObjectId(objectId);
-      msg.setContent(content);
-      Type type = Type.fromInt(typeInt);
-      msg.setType(type);
-    }
-    return msg;
-  }
+	public String getFromName() {
+		String peerId = getFromPeerId();
+		AVUser user = DemoApplication.lookupUser(peerId);
+		return user.getUsername();
+	}
 
-  public AVMessage toAVMessage() {
-    if (convid == null || content == null || objectId == null
-        || roomType == null || status == null || type == null) {
-      throwNullException();
-    }
-    HashMap<String, Object> params = new HashMap<String, Object>();
-    params.put("objectId", objectId);
-    params.put("content", content);
-    params.put("type", type.getValue());
-    internalMessage.setMessage(JSON.toJSONString(params));
-    return internalMessage;
-  }
+	public CharSequence getNotifyContent() {
+		switch (type) {
+			case Audio:
+				return DemoApplication.context.getString(R.string.audio);
+			case Text:
+				if (EmotionUtils.haveEmotion(getContent())) {
+					return DemoApplication.context.getString(R.string.emotion);
+				} else {
+					return getContent();
+				}
+			case Image:
+				return DemoApplication.context.getString(R.string.image);
+			case Location:
+				return DemoApplication.context.getString(R.string.position);
+			default:
+				return DemoApplication.context.getString(R.string.newMessage);
+		}
+	}
 
-  public static void throwNullException() {
-    throw new NullPointerException("at least one of these is null: content,objectId,type");
-  }
+	public static Msg fromAVMessage(AVMessage avMsg) {
+		Msg msg = new Msg();
+		msg.setInternalMessage(avMsg);
+		if (!AVUtils.isBlankString(avMsg.getMessage())) {
+			HashMap<String, Object> params = JSON.parseObject(avMsg.getMessage(), HashMap.class);
+			String objectId = (String) params.get("objectId");
+			String content = (String) params.get("content");
+			Integer typeInt = (Integer) params.get("type");
+			if (objectId == null || content == null ||
+					typeInt == null) {
+				throwNullException();
+			}
+			msg.setObjectId(objectId);
+			msg.setContent(content);
+			Type type = Type.fromInt(typeInt);
+			msg.setType(type);
+		}
+		return msg;
+	}
 
-  @Override
-  public String toString() {
-    return "{content:" + getContent() + " objectId:" + getObjectId() + " status:" + getStatus() + " fromPeerId:" +
-        getFromPeerId() + " toPeerIds:" + getToPeerIds()
-        + " timestamp:" + getTimestamp() + " type=" + getType() + "}";
-  }
+	public AVMessage toAVMessage() {
+		if (convid == null || content == null || objectId == null
+				|| roomType == null || status == null || type == null) {
+			throwNullException();
+		}
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("objectId", objectId);
+		params.put("content", content);
+		params.put("type", type.getValue());
+		internalMessage.setMessage(JSON.toJSONString(params));
+		return internalMessage;
+	}
 
-  public String getAudioPath() {
-    return PathUtils.getChatFileDir() + getObjectId();
-  }
+	public static void throwNullException() {
+		throw new NullPointerException("at least one of these is null: content,objectId,type");
+	}
+
+	@Override
+	public String toString() {
+		return "{content:" + getContent() + " objectId:" + getObjectId() + " status:" + getStatus() + " fromPeerId:" +
+				getFromPeerId() + " toPeerIds:" + getToPeerIds()
+				+ " timestamp:" + getTimestamp() + " type=" + getType() + "}";
+	}
+
+	public String getAudioPath() {
+		return PathUtils.getChatFileDir() + getObjectId();
+	}
 
 
 }

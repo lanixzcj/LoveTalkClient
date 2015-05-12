@@ -20,33 +20,34 @@ public class BlogDateAdapter extends BaseAdapter {
 	private ArrayList<String> listBlog = null;
 	private ArrayList<String> listTime = null;
 	Context mContext = null;
-	public BlogDateAdapter(ArrayList<String> blogList, ArrayList<String> blogTime , Context context) {
+
+	public BlogDateAdapter(ArrayList<String> blogList, ArrayList<String> blogTime, Context context) {
 		listBlog = blogList;
 		listTime = blogTime;
 		mContext = context;
 	}
-	
+
 	//用以构造显示在ListView中的TextView
 	TextView getTextView() {
 		//设置TextView的样式
-        AbsListView.LayoutParams lp = new AbsListView.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, 64);
-        TextView textView = new TextView(
-        		mContext);
-        textView.setLayoutParams(lp);
-        textView.setGravity(Gravity.CENTER_VERTICAL);
-        //设置TextView的Padding值
-        textView.setPadding(16, -10, 0, 32);
-        //设置TextView的字体大小
-        textView.setTextSize(14);
-        //设置TextView的字体颜色
-        textView.setTextColor(Color.WHITE);
-        //设置字体加粗
-        TextPaint txt = textView.getPaint();
-        txt.setFakeBoldText(true);
-        return textView;
-    }
-	
+		AbsListView.LayoutParams lp = new AbsListView.LayoutParams(
+				ViewGroup.LayoutParams.WRAP_CONTENT, 64);
+		TextView textView = new TextView(
+				mContext);
+		textView.setLayoutParams(lp);
+		textView.setGravity(Gravity.CENTER_VERTICAL);
+		//设置TextView的Padding值
+		textView.setPadding(16, -10, 0, 32);
+		//设置TextView的字体大小
+		textView.setTextSize(14);
+		//设置TextView的字体颜色
+		textView.setTextColor(Color.WHITE);
+		//设置字体加粗
+		TextPaint txt = textView.getPaint();
+		txt.setFakeBoldText(true);
+		return textView;
+	}
+
 	//用以构造显示在ListView中的ImageView
 	ImageView getImageView() {
 		ImageView imageview = new ImageView(
@@ -56,7 +57,7 @@ public class BlogDateAdapter extends BaseAdapter {
 		return imageview;
 	}
 
-	
+
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
@@ -83,37 +84,36 @@ public class BlogDateAdapter extends BaseAdapter {
 		RelativeLayout ll = new RelativeLayout(mContext);
 		ll.setLayoutParams(lp);
 		ll.setGravity(Gravity.CENTER);
-		
-        RelativeLayout.LayoutParams lpblogTime = new RelativeLayout.LayoutParams(
-        		LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        lpblogTime.setMargins(24, 10, 0, 0);
-        TextView blogTime = getTextView();
-        blogTime.setLayoutParams(lpblogTime);
-        blogTime.setTextColor(Color.RED);
-        blogTime.setText(listTime.get(position).toString());
-        blogTime.setTextSize(14);
-        blogTime.setPadding(0, 0, 0, 0);
-        
-        RelativeLayout.LayoutParams lpblogContent = new RelativeLayout.LayoutParams(
-        		LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        lpblogContent.setMargins(0, 70, 0, 0);
-        TextView blogContent = getTextView();
-        blogContent.setLayoutParams(lpblogContent);
-        blogContent.setTextColor(Color.BLACK);
-        blogContent.setText(listBlog.get(position).toString());
-        blogContent.setTextSize(14);
-        blogContent.setPadding(0, 0, 0, 0);
-        
-        
-        
-        ll.addView(blogTime);
-        ll.addView(blogContent);
-        
-        return ll;
+
+		RelativeLayout.LayoutParams lpblogTime = new RelativeLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		lpblogTime.setMargins(24, 10, 0, 0);
+		TextView blogTime = getTextView();
+		blogTime.setLayoutParams(lpblogTime);
+		blogTime.setTextColor(Color.RED);
+		blogTime.setText(listTime.get(position).toString());
+		blogTime.setTextSize(14);
+		blogTime.setPadding(0, 0, 0, 0);
+
+		RelativeLayout.LayoutParams lpblogContent = new RelativeLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		lpblogContent.setMargins(0, 70, 0, 0);
+		TextView blogContent = getTextView();
+		blogContent.setLayoutParams(lpblogContent);
+		blogContent.setTextColor(Color.BLACK);
+		blogContent.setText(listBlog.get(position).toString());
+		blogContent.setTextSize(14);
+		blogContent.setPadding(0, 0, 0, 0);
+
+
+		ll.addView(blogTime);
+		ll.addView(blogContent);
+
+		return ll;
 	}
-	
+
 	public String getContent(int position) {
 		return listBlog.get(position);
 	}
-	
+
 }

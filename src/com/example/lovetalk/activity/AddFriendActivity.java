@@ -22,76 +22,76 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddFriendActivity extends BaseActivity implements OnClickListener, XListView.IXListViewListener, OnItemClickListener {
-  EditText searchNameEdit;
-  Button searchBtn;
-  List<AVUser> users = new ArrayList<AVUser>();//change it first , then adapter
-  XListView listView;
-  AddFriendAdapter adapter;
-  String searchName = "";
+	private EditText mSearchNameEdit;
+	private Button mSearchBtn;
+	private List<AVUser> mUsers = new ArrayList<AVUser>();//change it first , then adapter
+	private XListView mListView;
+	private AddFriendAdapter mAdapter;
+	private String mSearchName = "";
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    // TODO Auto-generated method stub
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.contact_add_friend_activity);
-    initView();
-    search(searchName);
-  }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.contact_add_friend_activity);
+		initView();
+		search(mSearchName);
+	}
 
-  private void initView() {
-    initActionBar(DemoApplication.context.getString(R.string.findFriends));
-    searchNameEdit = (EditText) findViewById(R.id.searchNameEdit);
-    searchBtn = (Button) findViewById(R.id.searchBtn);
-    searchBtn.setOnClickListener(this);
-    initXListView();
-  }
+	private void initView() {
+		initActionBar(DemoApplication.context.getString(R.string.findFriends));
+		mSearchNameEdit = (EditText) findViewById(R.id.searchNameEdit);
+		mSearchBtn = (Button) findViewById(R.id.searchBtn);
+		mSearchBtn.setOnClickListener(this);
+		initXListView();
+	}
 
-  private void initXListView() {
-    listView = (XListView) findViewById(R.id.searchList);
-    listView.setPullLoadEnable(false);
-    listView.setPullRefreshEnable(false);
-    listView.setXListViewListener(this);
+	private void initXListView() {
+		mListView = (XListView) findViewById(R.id.searchList);
+		mListView.setPullLoadEnable(false);
+		mListView.setPullRefreshEnable(false);
+		mListView.setXListViewListener(this);
 
-    adapter = new AddFriendAdapter(this, users);
-    listView.setAdapter(adapter);
-    listView.setOnItemClickListener(this);
-  }
+		mAdapter = new AddFriendAdapter(this, mUsers);
+		mListView.setAdapter(mAdapter);
+		mListView.setOnItemClickListener(this);
+	}
 
-  @Override
-  public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-    // TODO Auto-generated method stub
-  }
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+		// TODO Auto-generated method stub
+	}
 
-  @Override
-  public void onClick(View view) {
-    switch (view.getId()) {
-      case R.id.searchBtn:
-        searchName = searchNameEdit.getText().toString();
-        if (searchName != null) {
-          adapter.clear();
-          search(searchName);
-        }
-        break;
-    }
-  }
+	@Override
+	public void onClick(View view) {
+		switch (view.getId()) {
+			case R.id.searchBtn:
+				mSearchName = mSearchNameEdit.getText().toString();
+				if (mSearchName != null) {
+					mAdapter.clear();
+					search(mSearchName);
+				}
+				break;
+		}
+	}
 
-  private void search(String searchName) {
-    searchUser(searchName, adapter.getCount(), new FindCallback<AVUser>() {
-      @Override
-      public void done(List<AVUser> users, AVException e) {
-        stopLoadMore();
-        if (e != null) {
-          e.printStackTrace();
-          Utils.toast(context, "网络错误");
-        } else {
-          Utils.handleListResult(listView, adapter, users);
-        }
-      }
-    });
-  }
+	private void search(String searchName) {
+		searchUser(searchName, mAdapter.getCount(), new FindCallback<AVUser>() {
+			@Override
+			public void done(List<AVUser> users, AVException e) {
+				stopLoadMore();
+				if (e != null) {
+					e.printStackTrace();
+					Utils.toast(mContext, "网络错误");
+				} else {
+					Utils.handleListResult(mListView, mAdapter, users);
+				}
+			}
+		});
+	}
 
 	public void searchUser(String searchName, int skip,
-			FindCallback<AVUser> findCallback) {
+						   FindCallback<AVUser> findCallback) {
 		AVQuery<AVUser> q = AVUser.getQuery(AVUser.class);
 		q.whereContains("username", searchName);
 		q.limit(10);
@@ -115,19 +115,19 @@ public class AddFriendActivity extends BaseActivity implements OnClickListener, 
 	}
 
 	@Override
-  public void onRefresh() {
-    // TODO Auto-generated method stub
-  }
+	public void onRefresh() {
+		// TODO Auto-generated method stub
+	}
 
-  @Override
-  public void onLoadMore() {
-    // TODO Auto-generated method stub
-    search(searchName);
-  }
+	@Override
+	public void onLoadMore() {
+		// TODO Auto-generated method stub
+		search(mSearchName);
+	}
 
-  private void stopLoadMore() {
-    if (listView.getPullLoading()) {
-      listView.stopLoadMore();
-    }
-  }
+	private void stopLoadMore() {
+		if (mListView.getPullLoading()) {
+			mListView.stopLoadMore();
+		}
+	}
 }

@@ -41,13 +41,13 @@ public class MySpaceFragment extends BaseFragment implements
 	TextView usernameView, genderView, mobileView, emailView, logoutView;
 	ImageView avatarView;
 	View usernameLayout, avatarLayout, logoutLayout, genderLayout;
-	public static String[] genderStrings = new String[] {
+	public static String[] genderStrings = new String[]{
 			DemoApplication.context.getString(R.string.male),
-			DemoApplication.context.getString(R.string.female) };
+			DemoApplication.context.getString(R.string.female)};
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+							 Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.my_space_fragment, container, false);
 	}
 
@@ -86,10 +86,10 @@ public class MySpaceFragment extends BaseFragment implements
 		logoutLayout = fragmentView.findViewById(R.id.logoutLayout);
 		genderLayout = fragmentView.findViewById(R.id.sexLayout);
 		genderView = (TextView) fragmentView.findViewById(R.id.sex);
-		mobileView = (TextView) fragmentView.findViewById(R.id.mobile); 
-		emailView = (TextView) fragmentView.findViewById(R.id.email); 
-		logoutView = (TextView) fragmentView.findViewById(R.id.logout); 
-		
+		mobileView = (TextView) fragmentView.findViewById(R.id.mobile);
+		emailView = (TextView) fragmentView.findViewById(R.id.email);
+		logoutView = (TextView) fragmentView.findViewById(R.id.logout);
+
 		avatarLayout.setOnClickListener(this);
 		logoutView.setOnClickListener(this);
 		genderLayout.setOnClickListener(this);
@@ -128,7 +128,7 @@ public class MySpaceFragment extends BaseFragment implements
 						new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog,
-									int which) {
+												int which) {
 								int gender;
 								if (which == 0) {
 									gender = 0;

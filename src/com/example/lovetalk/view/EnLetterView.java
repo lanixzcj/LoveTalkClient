@@ -1,8 +1,5 @@
 package com.example.lovetalk.view;
 
-import com.example.lovetalk.R;
-import com.example.lovetalk.util.PixelUtil;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -14,12 +11,15 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.lovetalk.R;
+import com.example.lovetalk.util.PixelUtil;
+
 public class EnLetterView extends View {
 	private OnTouchingLetterChangedListener onTouchingLetterChangedListener;
-	public static String[] letters = { "A", "B", "C", "D", "E", "F", "G", "H",
+	public static String[] letters = {"A", "B", "C", "D", "E", "F", "G", "H",
 			"I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U",
-			"V", "W", "X", "Y", "Z", "#" };
-	private int choose = -1;// 閫変腑
+			"V", "W", "X", "Y", "Z", "#"};
+	private int choose = -1;
 	private Paint paint = new Paint();
 
 	private TextView textDialog;
@@ -73,33 +73,33 @@ public class EnLetterView extends View {
 		final int c = (int) (y / getHeight() * letters.length);
 
 		switch (action) {
-		case MotionEvent.ACTION_UP:
-			setBackgroundDrawable(new ColorDrawable(0x00000000));
-			choose = -1;
-			invalidate();
-			if (textDialog != null) {
-				textDialog.setVisibility(View.INVISIBLE);
-			}
-			break;
-
-		default:
-			setBackgroundResource(R.drawable.v2_sortlistview_sidebar_background);
-			if (oldChoose != c) {
-				if (c >= 0 && c < letters.length) {
-					if (listener != null) {
-						listener.onTouchingLetterChanged(letters[c]);
-					}
-					if (textDialog != null) {
-						textDialog.setText(letters[c]);
-						textDialog.setVisibility(View.VISIBLE);
-					}
-
-					choose = c;
-					invalidate();
+			case MotionEvent.ACTION_UP:
+				setBackgroundDrawable(new ColorDrawable(0x00000000));
+				choose = -1;
+				invalidate();
+				if (textDialog != null) {
+					textDialog.setVisibility(View.INVISIBLE);
 				}
-			}
+				break;
 
-			break;
+			default:
+				setBackgroundResource(R.drawable.v2_sortlistview_sidebar_background);
+				if (oldChoose != c) {
+					if (c >= 0 && c < letters.length) {
+						if (listener != null) {
+							listener.onTouchingLetterChanged(letters[c]);
+						}
+						if (textDialog != null) {
+							textDialog.setText(letters[c]);
+							textDialog.setVisibility(View.VISIBLE);
+						}
+
+						choose = c;
+						invalidate();
+					}
+				}
+
+				break;
 		}
 		return true;
 	}

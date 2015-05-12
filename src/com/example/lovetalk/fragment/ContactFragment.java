@@ -55,7 +55,7 @@ public class ContactFragment extends BaseFragment implements
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+							 Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		return inflater.inflate(R.layout.contact_fragment, container, false);
 	}
@@ -100,12 +100,12 @@ public class ContactFragment extends BaseFragment implements
 				String pinyin = CharacterParser.getPingYin(user.getUsername());
 				String sortString = pinyin.substring(0, 1).toUpperCase();
 				if (sortString.matches("[A-Z]")) {
-					Log.d("lan",sortString.toUpperCase());
+					Log.d("lan", sortString.toUpperCase());
 				} else {
 					Log.d("lan", "#");
 				}
 			} else {
-				Log.d("lan","#");
+				Log.d("lan", "#");
 			}
 			friends.add(sortUser);
 		}
@@ -119,7 +119,7 @@ public class ContactFragment extends BaseFragment implements
 				R.layout.contact_include_new_friend, null);
 		msgTipsView = (ImageView) headView.findViewById(R.id.iv_msg_tips);
 		newFriendLayout = (LinearLayout) headView.findViewById(R.id.layout_new);
-		
+
 
 		newFriendLayout.setOnClickListener(this);
 
@@ -132,7 +132,7 @@ public class ContactFragment extends BaseFragment implements
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
-				 Utils.hideSoftInputView(getActivity());
+				Utils.hideSoftInputView(getActivity());
 				return false;
 			}
 		});
@@ -151,16 +151,16 @@ public class ContactFragment extends BaseFragment implements
 		rightLetter = (EnLetterView) getView().findViewById(R.id.right_letter);
 		dialog = (TextView) getView().findViewById(R.id.dialog);
 		rightLetter.setTextView(dialog);
-		 rightLetter.setOnTouchingLetterChangedListener(new
-		 LetterListViewListener());
+		rightLetter.setOnTouchingLetterChangedListener(new
+				LetterListViewListener());
 	}
 
 	@Override
 	public void onClick(View v) {
 		int viewId = v.getId();
-		 if (viewId == R.id.layout_new) {
-		 Utils.goActivity(context, NewFriendActivity.class);
-		 } 
+		if (viewId == R.id.layout_new) {
+			Utils.goActivity(context, NewFriendActivity.class);
+		}
 	}
 
 	private class LetterListViewListener implements
@@ -176,9 +176,9 @@ public class ContactFragment extends BaseFragment implements
 	}
 
 	private void setAddRequestTipsAndListView(boolean hasAddRequest,
-			List<AVUser> friends) {
+											  List<AVUser> friends) {
 		msgTipsView.setVisibility(hasAddRequest ? View.VISIBLE : View.GONE);
-		
+
 		fillFriendsData(friends);
 		if (userAdapter == null) {
 			userAdapter = new UserFriendAdapter(getActivity(), friends);
@@ -211,6 +211,7 @@ public class ContactFragment extends BaseFragment implements
 		new MyAsyncTask(context, false) {
 			boolean haveAddRequest;
 			List<AVUser> friends;
+
 			@Override
 			protected void onPost(Exception e) {
 				// TODO Auto-generated method stub
@@ -233,15 +234,15 @@ public class ContactFragment extends BaseFragment implements
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-			long arg3) {
-		 //TODO Auto-generated method stub
-		 AVUser user = (AVUser) userAdapter.getItem(position - 1);
-		 ChatActivity.goUserChat(getActivity(),user.getObjectId());
+							long arg3) {
+		//TODO Auto-generated method stub
+		AVUser user = (AVUser) userAdapter.getItem(position - 1);
+		ChatActivity.goUserChat(getActivity(), user.getObjectId());
 	}
 
 	@Override
 	public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-			int position, long arg3) {
+								   int position, long arg3) {
 		// TODO Auto-generated method stub
 		AVUser user = (AVUser) userAdapter.getItem(position - 1);
 		showDeleteDialog(user);
@@ -255,7 +256,7 @@ public class ContactFragment extends BaseFragment implements
 						new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog,
-									int which) {
+												int which) {
 								deleteFriend(user);
 							}
 						}).setNegativeButton(R.string.cancel, null).show();

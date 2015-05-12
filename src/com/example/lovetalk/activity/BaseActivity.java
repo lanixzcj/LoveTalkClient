@@ -1,10 +1,6 @@
 package com.example.lovetalk.activity;
 
-import com.example.lovetalk.DemoApplication;
-import com.example.lovetalk.util.Utils;
-
 import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -12,22 +8,25 @@ import android.support.v4.app.FragmentActivity;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
+import com.example.lovetalk.DemoApplication;
+import com.example.lovetalk.util.Utils;
+
 public class BaseActivity extends FragmentActivity {
-	Context context;
+	Context mContext;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		context = this;
+		mContext = this;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case android.R.id.home:
-			super.onBackPressed();
-			return true;
+			case android.R.id.home:
+				super.onBackPressed();
+				return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}

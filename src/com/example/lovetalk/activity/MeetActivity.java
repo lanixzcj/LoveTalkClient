@@ -2,13 +2,11 @@ package com.example.lovetalk.activity;
 
 import java.util.List;
 
-import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVRelation;
 import com.avos.avoscloud.AVUser;
-import com.avos.avoscloud.GetCallback;
 import com.example.lovetalk.R;
 import com.example.lovetalk.adapter.MeetActivityAdapter;
 import com.example.lovetalk.service.UserService;
@@ -60,8 +58,9 @@ public class MeetActivity extends BaseActivity {
 	}
 
 	private void refresh() {
-		new MyAsyncTask(context) {
+		new MyAsyncTask(mContext) {
 			List<AVObject> meet;
+
 			@Override
 			protected void doInBack() throws Exception {
 				AVQuery<AVObject> query = new AVQuery<AVObject>("_User");
@@ -84,7 +83,7 @@ public class MeetActivity extends BaseActivity {
 					Utils.toast(context, "网络错误");
 				} else {
 					int num = meet.size();
-					times.setText("总共相遇"+num+"次");
+					times.setText("总共相遇" + num + "次");
 					updateView();
 					adapter = new MeetActivityAdapter(context, meet);
 					meetinginfo.setAdapter(adapter);
@@ -92,19 +91,21 @@ public class MeetActivity extends BaseActivity {
 			}
 		}.execute();
 	}
-	private void updateView(){
+
+	private void updateView() {
 		AVUser Myuser = AVUser.getCurrentUser();
 		String MyUrl = getAvatarUrl(Myuser);
 		String MyName = Myuser.getUsername();
-		
+
 		String YourUrl = getAvatarUrl(yourUser);
 		String YourName = yourUser.getUsername();
-		
+
 		UserService.displayAvatar(MyUrl, myAvatar);
 		UserService.displayAvatar(YourUrl, yourAvatar);
 		myName.setText(MyName);
 		yournName.setText(YourName);
 	}
+
 	public String getAvatarUrl(AVUser user) {
 		AVFile avatar = user.getAVFile("avatar");
 		if (avatar != null) {
@@ -113,24 +114,24 @@ public class MeetActivity extends BaseActivity {
 			return null;
 		}
 	}
-	
+
 	private void initView() {
-	    initActionBar("擦肩而过");
-	    times = (TextView) findViewById(R.id.times);
-	    yournName = (TextView) findViewById(R.id.yournmae);
-	    myName = (TextView) findViewById(R.id.myname);
-	    
-	    myAvatar = (ImageView) findViewById(R.id.myavatar);
-	    yourAvatar = (ImageView) findViewById(R.id.youravatar);
-	    
-	    meetinginfo = (ListView) findViewById(R.id.datashow);
-	    
-	    yourAvatar.setOnClickListener(new OnClickListener() {
-			
+		initActionBar("擦肩而过");
+		times = (TextView) findViewById(R.id.times);
+		yournName = (TextView) findViewById(R.id.yournmae);
+		myName = (TextView) findViewById(R.id.myname);
+
+		myAvatar = (ImageView) findViewById(R.id.myavatar);
+		yourAvatar = (ImageView) findViewById(R.id.youravatar);
+
+		meetinginfo = (ListView) findViewById(R.id.datashow);
+
+		yourAvatar.setOnClickListener(new OnClickListener() {
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				PersonInfoActivity.goPersonInfo(context, userid);
+				PersonInfoActivity.goPersonInfo(mContext, userid);
 			}
 		});
 	}
@@ -140,6 +141,7 @@ public class MeetActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onResume();
 	}
+
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub

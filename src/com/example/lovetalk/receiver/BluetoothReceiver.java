@@ -1,36 +1,33 @@
 package com.example.lovetalk.receiver;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-
-import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVGeoPoint;
-import com.avos.avoscloud.AVObject;
-import com.avos.avoscloud.AVQuery;
-import com.avos.avoscloud.AVRelation;
-import com.avos.avoscloud.AVUser;
-import com.avos.avoscloud.FindCallback;
-import com.avos.avoscloud.LogInCallback;
-import com.avos.avoscloud.LogUtil.log;
-import com.avos.avoscloud.SaveCallback;
-import com.example.lovetalk.DemoApplication;
-import com.example.lovetalk.fragment.MeetFragment;
-import com.example.lovetalk.object.MeetingInfo;
-import com.example.lovetalk.service.PreferenceMap;
-
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.AVRelation;
+import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.FindCallback;
+import com.avos.avoscloud.LogUtil.log;
+import com.avos.avoscloud.SaveCallback;
+import com.example.lovetalk.DemoApplication;
+import com.example.lovetalk.enity.MeetingInfo;
+import com.example.lovetalk.service.PreferenceMap;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 public class BluetoothReceiver extends BroadcastReceiver {
 	int count = 0;
 	String updateAction = "com.example.lovetalk.update";
+
 	@Override
 	public void onReceive(final Context context, Intent intent) {
 		// TODO Auto-generated method stub
@@ -81,14 +78,14 @@ public class BluetoothReceiver extends BroadcastReceiver {
 													// TODO Auto-generated
 													// method stub
 													MeetingInfo.addMeeting(meeting);
-													
-													
-													for(HashMap<String, Object> meeting:MeetingInfo.getList()){
-														AVUser user = (AVUser)meeting.get("user");
+
+
+													for (HashMap<String, Object> meeting : MeetingInfo.getList()) {
+														AVUser user = (AVUser) meeting.get("user");
 														Log.d("lan", user.getUsername());
 														Log.d("lan", meeting.get("times").toString());
 													}
-													
+
 													log.e("lan",
 															meeting.getString("YourAddress"));
 												}
@@ -113,7 +110,7 @@ public class BluetoothReceiver extends BroadcastReceiver {
 		}
 		if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
 			log.e("lan", "" + count);
-			if(count != 0){
+			if (count != 0) {
 				Intent intent2 = new Intent();
 				intent2.setAction(updateAction);
 				context.sendBroadcast(intent2);

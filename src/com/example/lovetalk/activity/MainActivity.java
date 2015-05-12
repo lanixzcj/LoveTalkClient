@@ -22,42 +22,41 @@ import android.view.Menu;
 import android.view.Window;
 
 
-
 public class MainActivity extends BaseEntryActivity {
 	private static final int GO_MAIN_MSG = 1;
 	private static final int GO_LOGIN_MSG = 2;
 	public static final int DURATION = 2000;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_welcome);
-		
-		
-		AVUser user = AVUser.getCurrentUser();
-	    if (user != null) {
-	      Utils.updateUserInfo();
-	      handler.sendEmptyMessageDelayed(GO_MAIN_MSG, DURATION);
-	    } else {
-	      handler.sendEmptyMessageDelayed(GO_LOGIN_MSG, DURATION);
-	    }
-	  }
 
-	  private Handler handler = new Handler() {
-	    @Override
-	    public void handleMessage(Message msg) {
-	      switch (msg.what) {
-	        case GO_MAIN_MSG:
-	          HomeActivity.goHomeActivity(MainActivity.this);
-	          finish();
-	          break;
-	        case GO_LOGIN_MSG:
-	          Utils.goActivity(MainActivity.this, LoginActivity.class);
-	          finish();
-	          break;
-	      }
-	    }
-	  };
-		
+
+		AVUser user = AVUser.getCurrentUser();
+		if (user != null) {
+			Utils.updateUserInfo();
+			handler.sendEmptyMessageDelayed(GO_MAIN_MSG, DURATION);
+		} else {
+			handler.sendEmptyMessageDelayed(GO_LOGIN_MSG, DURATION);
+		}
+	}
+
+	private Handler handler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+				case GO_MAIN_MSG:
+					HomeActivity.goHomeActivity(MainActivity.this);
+					finish();
+					break;
+				case GO_LOGIN_MSG:
+					Utils.goActivity(MainActivity.this, LoginActivity.class);
+					finish();
+					break;
+			}
+		}
+	};
+
 }
