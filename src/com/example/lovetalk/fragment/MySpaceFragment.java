@@ -154,19 +154,14 @@ public class MySpaceFragment extends BaseFragment implements
 				new MyAsyncTask(context) {
 
 					@Override
-					protected void onPost(Exception e) {
-						// TODO Auto-generated method stub
-						if (e != null) {
-							Log.d("lan", e.getMessage());
-						} else {
-							refresh();
-						}
-					}
-
-					@Override
 					protected void doInBack() throws Exception {
 						// TODO Auto-generated method stub
 						UserService.saveAvatar(path);
+					}
+
+					@Override
+					protected void onSucceed() {
+						refresh();
 					}
 				}.execute();
 			}

@@ -98,7 +98,8 @@
     <string name="findFriends">查找好友</string>
     <string name="dataLoadFinish">数据加载完成</string>
     <string name="add">添加</string>
-    <string name="sendRequestSucceed">发送请求成功，等待对方验证</string>
+    <string name="contact_sendRequestSucceed">发送请求成功，等待对方验证</string>
+    <string name="contact_alreadyCreateAddRequest">已经请求过了</string>
     <string name="personalInfo">个人资料</string>
     <string name="detailInfo">详细资料</string>
     <string name="male">男</string>

@@ -1,18 +1,5 @@
 package com.example.lovetalk.activity;
 
-import java.util.List;
-
-import com.avos.avoscloud.AVFile;
-import com.avos.avoscloud.AVObject;
-import com.avos.avoscloud.AVQuery;
-import com.avos.avoscloud.AVRelation;
-import com.avos.avoscloud.AVUser;
-import com.example.lovetalk.R;
-import com.example.lovetalk.adapter.MeetActivityAdapter;
-import com.example.lovetalk.service.UserService;
-import com.example.lovetalk.util.MyAsyncTask;
-import com.example.lovetalk.util.Utils;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +10,18 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.avos.avoscloud.AVFile;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.AVRelation;
+import com.avos.avoscloud.AVUser;
+import com.example.lovetalk.R;
+import com.example.lovetalk.adapter.MeetActivityAdapter;
+import com.example.lovetalk.service.UserService;
+import com.example.lovetalk.util.MyAsyncTask;
+
+import java.util.List;
 
 public class MeetActivity extends BaseActivity {
 	TextView times, myName, yournName;
@@ -77,18 +76,14 @@ public class MeetActivity extends BaseActivity {
 			}
 
 			@Override
-			protected void onPost(Exception e) {
-				if (e != null) {
-					e.printStackTrace();
-					Utils.toast(context, "网络错误");
-				} else {
-					int num = meet.size();
-					times.setText("总共相遇" + num + "次");
-					updateView();
-					adapter = new MeetActivityAdapter(context, meet);
-					meetinginfo.setAdapter(adapter);
-				}
+			protected void onSucceed() {
+				int num = meet.size();
+				times.setText("总共相遇" + num + "次");
+				updateView();
+				adapter = new MeetActivityAdapter(context, meet);
+				meetinginfo.setAdapter(adapter);
 			}
+
 		}.execute();
 	}
 

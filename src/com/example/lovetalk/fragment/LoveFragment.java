@@ -202,23 +202,23 @@ public class LoveFragment extends BaseFragment implements
 																					AVException e) {
 
 																				lPhone = lovePhone;
-																				bind.setVisibility(NO_VISIBLE);
+																				bind.setVisibility(View.GONE);
 																				loverPhone
-																						.setVisibility(NO_VISIBLE);
+																						.setVisibility(View.GONE);
 																				loverName
-																						.setVisibility(NO_VISIBLE);
+																						.setVisibility(View.GONE);
 																				getLovePhone();
 																				if (itsLovePhone
 																						.equals(myPhone)) {
 																					status.setText("暗恋状态：情投意合");
 																					container
 																							.setBackgroundResource(R.drawable.twolove);
-																					arrow.setVisibility(VISIBLE);
+																					arrow.setVisibility(View.VISIBLE);
 																				} else {
 																					status.setText("暗恋状态：单相思");
 																				}
 																				changeLove
-																						.setVisibility(VISIBLE);
+																						.setVisibility(View.VISIBLE);
 																				Toast.makeText(
 																						mContext,
 																						"暗恋成功",
@@ -367,34 +367,6 @@ public class LoveFragment extends BaseFragment implements
 														int which) {
 										// TODO Auto-generated method stub
 										new MyAsyncTask(mContext, false) {
-											@Override
-											protected void onPost(Exception e) {
-												// TODO Auto-generated method stub
-												if (e != null) {
-													Toast.makeText(mContext,
-															"网络错误",
-															Toast.LENGTH_LONG)
-															.show();
-												} else {
-													status.setText("未暗恋");
-													statusWord
-															.setText("我知道，你想重新开始一段新的旅程");
-													loverPhone.setText("");
-													loverPhone
-															.setVisibility(VISIBLE);
-													loverName.setText("");
-													loverName
-															.setVisibility(VISIBLE);
-													bind.setVisibility(VISIBLE);
-													container
-															.setBackgroundResource(R.drawable.nolove);
-													changeLove
-															.setVisibility(NO_VISIBLE);
-													lPhone = "";
-													itsLovePhone = "";
-													arrow.setVisibility(NO_VISIBLE);
-												}
-											}
 
 											@Override
 											protected void doInBack()
@@ -504,6 +476,27 @@ public class LoveFragment extends BaseFragment implements
 
 												threadChange.start();
 											}
+
+											@Override
+											protected void onSucceed() {
+												status.setText("未暗恋");
+												statusWord
+														.setText("我知道，你想重新开始一段新的旅程");
+												loverPhone.setText("");
+												loverPhone
+														.setVisibility(View.VISIBLE);
+												loverName.setText("");
+												loverName
+														.setVisibility(View.VISIBLE);
+												bind.setVisibility(View.VISIBLE);
+												container
+														.setBackgroundResource(R.drawable.nolove);
+												changeLove
+														.setVisibility(View.GONE);
+												lPhone = "";
+												itsLovePhone = "";
+												arrow.setVisibility(View.GONE);
+											}
 										}.execute();
 									}
 								})
@@ -565,15 +558,15 @@ public class LoveFragment extends BaseFragment implements
 					userId = avObjects.get(0).getObjectId();
 
 					if (lPhone == null || lPhone.equals("")) {
-						bind.setVisibility(VISIBLE);
-						loverPhone.setVisibility(VISIBLE);
-						loverName.setVisibility(VISIBLE);
+						bind.setVisibility(View.VISIBLE);
+						loverPhone.setVisibility(View.VISIBLE);
+						loverName.setVisibility(View.VISIBLE);
 						Log.d("Leancloud", "没有暗恋对象");
 						status.setText("未暗恋");
 						statusWord.setText("我懂，你的暗恋苦楚");
 					} else {
 						Log.d("Leancloud", "有暗恋对象");
-						changeLove.setVisibility(VISIBLE);
+						changeLove.setVisibility(View.VISIBLE);
 						getLovePhone();
 					}
 
@@ -602,7 +595,7 @@ public class LoveFragment extends BaseFragment implements
 						status.setText("情投意合");
 						statusWord.setText("爱情开始咯");
 						container.setBackgroundResource(R.drawable.twolove);
-						arrow.setVisibility(VISIBLE);
+						arrow.setVisibility(View.VISIBLE);
 					} else {
 						statusWord.setText("我懂，你的暗恋苦楚");
 						status.setText("单相思");

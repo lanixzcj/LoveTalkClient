@@ -1,13 +1,5 @@
 package com.example.lovetalk.activity;
 
-import com.avos.avoscloud.AVUser;
-import com.example.lovetalk.R;
-import com.example.lovetalk.receiver.FinishReceiver;
-import com.example.lovetalk.util.MyAsyncTask;
-import com.example.lovetalk.util.Utils;
-
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,6 +8,11 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.avos.avoscloud.AVUser;
+import com.example.lovetalk.R;
+import com.example.lovetalk.util.MyAsyncTask;
+import com.example.lovetalk.util.Utils;
 
 public class LoginActivity extends BaseEntryActivity implements OnClickListener,
 		OnFocusChangeListener {
@@ -93,21 +90,17 @@ public class LoginActivity extends BaseEntryActivity implements OnClickListener,
 
 		new MyAsyncTask(this) {
 
-			@Override
-			protected void onPost(Exception e) {
-				// TODO Auto-generated method stub
-				if (e != null) {
-					Utils.toast(context, "登录失败:" + e.getMessage());
-				} else {
-					Utils.toast(context, "登录成功");
-					Utils.goActivity(context, HomeActivity.class);
-				}
-			}
 
 			@Override
 			protected void doInBack() throws Exception {
 				// TODO Auto-generated method stub
 				AVUser.logIn(email, pwd);
+			}
+
+			@Override
+			protected void onSucceed() {
+				Utils.toast("登录成功");
+				Utils.goActivity(context, HomeActivity.class);
 			}
 		}.execute();
 	}

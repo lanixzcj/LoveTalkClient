@@ -9,7 +9,12 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSONException;
-import com.avos.avoscloud.*;
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVMessage;
+import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.Group;
+import com.avos.avoscloud.Session;
+import com.avos.avoscloud.SessionManager;
 import com.example.lovetalk.DemoApplication;
 import com.example.lovetalk.activity.ChatActivity;
 import com.example.lovetalk.chat.db.DBMsg;
@@ -23,7 +28,12 @@ import com.example.lovetalk.util.Utils;
 import com.example.lovetallk.service.listener.MsgListener;
 
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 /**
  * Created by lzw on 14-7-9.
@@ -179,29 +189,18 @@ public class ChatService {
 			}
 
 			@Override
-			protected void onPost(Exception e) {
-				if (e != null) {
-					Utils.toast(context, "网络错误");
-				} else {
-					DBMsg.insertMsg(msg);
-					String otherId = getOtherId(msg.getFromPeerId(), group);
-					boolean done = false;
-					for (MsgListener listener : listeners) {
-						if (listener.onMessageUpdate(otherId)) {
-							done = true;
-							break;
-						}
-					}
-					if (!done) {
-						if (AVUser.getCurrentUser() != null) {
-							PreferenceMap preferenceMap = PreferenceMap.getCurUserPrefDao(context);
-//              if (preferenceMap.isNotifyWhenNews()) {
-//                notifyMsg(context, msg, group);
-//              }
-						}
+			protected void onSucceed() {
+				DBMsg.insertMsg(msg);
+				String otherId = getOtherId(msg.getFromPeerId(), group);
+				boolean done = false;
+				for (MsgListener listener : listeners) {
+					if (listener.onMessageUpdate(otherId)) {
+						done = true;
+						break;
 					}
 				}
 			}
+
 		}.execute();
 	}
 

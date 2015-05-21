@@ -6,7 +6,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVFile;
@@ -16,10 +20,8 @@ import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.GetCallback;
 import com.example.lovetalk.DemoApplication;
 import com.example.lovetalk.R;
-import com.example.lovetalk.service.CloudService;
+import com.example.lovetalk.service.AddRequestService;
 import com.example.lovetalk.service.UserService;
-import com.example.lovetalk.util.MyAsyncTask;
-import com.example.lovetalk.util.Utils;
 
 import java.util.List;
 
@@ -155,21 +157,7 @@ public class PersonInfoActivity extends BaseActivity implements OnClickListener 
 				finish();
 				break;
 			case R.id.addFriendBtn:// 添加好友
-				new MyAsyncTask(mContext) {
-					@Override
-					protected void doInBack() throws Exception {
-						CloudService.tryCreateAddRequest(user);
-					}
-
-					@Override
-					protected void onPost(Exception e) {
-						if (e != null) {
-							Utils.toast(context, e.getMessage());
-						} else {
-							Utils.toast(context, "已发出请求");
-						}
-					}
-				}.execute();
+				AddRequestService.createAddRequestInBackground(mContext, user);
 				break;
 		}
 	}

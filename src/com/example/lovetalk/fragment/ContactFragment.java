@@ -3,7 +3,6 @@ package com.example.lovetalk.fragment;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -11,18 +10,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVFile;
-import com.avos.avoscloud.AVQuery;
-import com.avos.avoscloud.AVRelation;
 import com.avos.avoscloud.AVUser;
 import com.example.lovetalk.DemoApplication;
 import com.example.lovetalk.R;
@@ -39,6 +35,10 @@ import com.example.lovetalk.util.PinyinComparator;
 import com.example.lovetalk.util.Utils;
 import com.example.lovetalk.view.EnLetterView;
 import com.example.lovetalk.view.HeaderLayout;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class ContactFragment extends BaseFragment implements
 		OnItemClickListener, OnItemLongClickListener, OnClickListener {
@@ -213,20 +213,15 @@ public class ContactFragment extends BaseFragment implements
 			List<AVUser> friends;
 
 			@Override
-			protected void onPost(Exception e) {
-				// TODO Auto-generated method stub
-				if (e != null) {
-					Utils.toast(context, "网络错误");
-				} else {
-					setAddRequestTipsAndListView(haveAddRequest, friends);
-				}
-			}
-
-			@Override
 			protected void doInBack() throws Exception {
 				// TODO Auto-generated method stub
 				haveAddRequest = AddRequestService.hasAddRequest();
 				friends = UserService.findFriends();
+			}
+
+			@Override
+			protected void onSucceed() {
+				setAddRequestTipsAndListView(haveAddRequest, friends);
 			}
 		}.execute();
 		//
@@ -266,21 +261,16 @@ public class ContactFragment extends BaseFragment implements
 		new MyAsyncTask(context) {
 
 			@Override
-			protected void onPost(Exception e) {
-				// TODO Auto-generated method stub
-				if (e != null) {
-					Utils.toast(context, "网络错误");
-				} else {
-					Utils.toast(context, "删除成功");
-					userAdapter.remove(user);
-				}
-			}
-
-			@Override
 			protected void doInBack() throws Exception {
 				// TODO Auto-generated method stub
 				AVUser curUser = AVUser.getCurrentUser();
 				CloudService.removeFriendForBoth(curUser, user);
+			}
+
+			@Override
+			protected void onSucceed() {
+				Utils.toast("删除成功");
+				userAdapter.remove(user);
 			}
 		};
 	}

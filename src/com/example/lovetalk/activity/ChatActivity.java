@@ -394,14 +394,11 @@ public class ChatActivity extends BaseActivity implements OnClickListener, MsgLi
 		}
 
 		@Override
-		protected void onPost(Exception e) {
-			if (e == null) {
-				ChatUtils.stopRefresh(xListView);
-				addMsgsAndRefresh(msgs, scrollToLast);
-			} else {
-				Utils.toast(ctx, "获取失败");
-			}
+		protected void onSucceed() {
+			ChatUtils.stopRefresh(xListView);
+			addMsgsAndRefresh(msgs, scrollToLast);
 		}
+
 	}
 
 	public void addMsgsAndRefresh(List<Msg> msgs, boolean scrollToLast) {
@@ -415,7 +412,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, MsgLi
 		} else {
 			xListView.setSelection(newN - lastN - 1);
 			if (lastN == newN) {
-				Utils.toast(ctx, "加载完毕");
+				Utils.toast("加载完毕");
 			}
 		}
 		if (newN < PAGE_SIZE) {
@@ -614,7 +611,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, MsgLi
 				}
 			}.execute();
 		} else {
-			Utils.toast(ctx, "无法连接");
+			Utils.toast("无法连接");
 		}
 	}
 
@@ -637,13 +634,8 @@ public class ChatActivity extends BaseActivity implements OnClickListener, MsgLi
 		}
 
 		@Override
-		protected void onPost(Exception e) {
-			if (e != null) {
-				e.printStackTrace();
-				Utils.toast(ctx, e.getMessage());
-			} else {
-				loadMsgsFromDB(false);
-			}
+		protected void onSucceed() {
+			loadMsgsFromDB(false);
 		}
 
 		abstract Msg sendMsg() throws Exception;

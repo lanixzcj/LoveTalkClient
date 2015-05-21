@@ -1,13 +1,5 @@
 package com.example.lovetalk.activity;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -34,6 +26,14 @@ import com.example.lovetalk.R;
 import com.example.lovetalk.adapter.BlogAdapter;
 import com.example.lovetalk.adapter.BlogDateAdapter;
 import com.example.lovetalk.util.MyAsyncTask;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 public class ItsBlogActivity extends Activity {
 	private TextView showDate;
@@ -113,15 +113,6 @@ public class ItsBlogActivity extends Activity {
 					//在TextView上显示日期
 
 					new MyAsyncTask(mContext, false) {
-						@Override
-						protected void onPost(Exception e) {
-							// TODO Auto-generated method stub
-							if (e != null) {
-
-							} else {
-
-							}
-						}
 
 						@Override
 						protected void doInBack() throws Exception {
@@ -178,22 +169,17 @@ public class ItsBlogActivity extends Activity {
 							showDate.setText("当前日志日期：" + year + "-" + (month + 1) + "-" + day);
 
 						}
+
+						@Override
+						protected void onSucceed() {
+
+						}
 					}.execute();
 				}
 			};
 
 	public void toQuery() {
 		new MyAsyncTask(mContext, false) {
-			@Override
-			protected void onPost(Exception e) {
-				// TODO Auto-generated method stub
-				if (e != null) {
-					Toast.makeText(mContext, "网络错误",
-							Toast.LENGTH_LONG).show();
-				} else {
-
-				}
-			}
 
 			@Override
 			protected void doInBack() throws Exception {
@@ -277,6 +263,11 @@ public class ItsBlogActivity extends Activity {
 						}
 					}
 				});
+			}
+
+			@Override
+			protected void onSucceed() {
+
 			}
 		}.execute();
 

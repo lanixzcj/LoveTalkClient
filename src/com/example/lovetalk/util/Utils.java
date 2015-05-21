@@ -1,5 +1,34 @@
 package com.example.lovetalk.util;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
+
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVGeoPoint;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.GetCallback;
+import com.avos.avoscloud.LogUtil.log;
+import com.avos.avoscloud.SaveCallback;
+import com.example.lovetalk.DemoApplication;
+import com.example.lovetalk.adapter.BaseListAdapter;
+import com.example.lovetalk.service.PreferenceMap;
+import com.example.lovetalk.view.xlist.XListView;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,37 +42,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
-import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVGeoPoint;
-import com.avos.avoscloud.AVObject;
-import com.avos.avoscloud.AVUser;
-import com.avos.avoscloud.GetCallback;
-import com.avos.avoscloud.LogUtil.log;
-import com.avos.avoscloud.SaveCallback;
-import com.example.lovetalk.DemoApplication;
-import com.example.lovetalk.R;
-import com.example.lovetalk.adapter.BaseListAdapter;
-import com.example.lovetalk.service.PreferenceMap;
-import com.example.lovetalk.view.xlist.XListView;
-
-import android.app.Activity;
-import android.app.Application;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
 
 public class Utils {
 	public static ProgressDialog showSpinnerDialog(Activity activity) {
@@ -64,8 +62,12 @@ public class Utils {
 		context.startActivity(intent);
 	}
 
-	public static void toast(Context context, String str) {
-		Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
+	public static void toast(String str) {
+		Toast.makeText(DemoApplication.context, str, Toast.LENGTH_SHORT).show();
+	}
+
+	public static void toast(int res) {
+		Toast.makeText(DemoApplication.context, DemoApplication.context.getResources().getString(res), Toast.LENGTH_SHORT).show();
 	}
 
 	public static void updateUserInfo() {
@@ -130,9 +132,9 @@ public class Utils {
 		} else {
 			listView.setPullLoadEnable(false);
 			if (adapter.getCount() == 0) {
-				Utils.toast(DemoApplication.context, "无结果");
+				Utils.toast("无结果");
 			} else {
-				Utils.toast(DemoApplication.context, "加载完毕");
+				Utils.toast("加载完毕");
 			}
 		}
 	}

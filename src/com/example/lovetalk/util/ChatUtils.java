@@ -2,15 +2,16 @@ package com.example.lovetalk.util;
 
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.avos.avoscloud.*;
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVGeoPoint;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.GetCallback;
+import com.avos.avoscloud.SaveCallback;
 import com.example.lovetalk.DemoApplication;
 import com.example.lovetalk.adapter.BaseListAdapter;
 import com.example.lovetalk.service.PreferenceMap;
-import com.example.lovetalk.service.UserService;
-import com.example.lovetalk.view.ViewHolder;
 import com.example.lovetalk.view.xlist.XListView;
 
 import java.util.List;
@@ -31,9 +32,9 @@ public class ChatUtils {
 		} else {
 			listView.setPullLoadEnable(false);
 			if (adapter.getCount() == 0) {
-				Utils.toast(DemoApplication.context, "无结果");
+				Utils.toast("无结果");
 			} else {
-				Utils.toast(DemoApplication.context, "加载完毕");
+				Utils.toast("加载完毕");
 			}
 		}
 	}

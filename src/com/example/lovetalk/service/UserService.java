@@ -160,6 +160,26 @@ public class UserService {
 		user.fetch();
 	}
 
+	public static void addFriend(String friendId, final SaveCallback saveCallback) {
+		AVUser user = AVUser.getCurrentUser();
+		user.followInBackground(friendId, new FollowCallback() {
+			@Override
+			public void done(AVObject object, AVException e) {
+				saveCallback.done(e);
+			}
+		});
+	}
+
+	public static void removeFriend(String friendId, final SaveCallback saveCallback) {
+		AVUser user = AVUser.getCurrentUser();
+		user.unfollowInBackground(friendId, new FollowCallback() {
+			@Override
+			public void done(AVObject object, AVException e) {
+				saveCallback.done(e);
+			}
+		});
+	}
+
 	//
 	public static void cacheUserIfNone(String userId) throws AVException {
 		if (DemoApplication.lookupUser(userId) == null) {

@@ -1,45 +1,19 @@
 package com.example.lovetalk.activity;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.ParseException;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
-
-
-import com.avos.avoscloud.AVUser;
-import com.example.lovetalk.R;
-import com.example.lovetalk.util.MyAsyncTask;
-import com.example.lovetalk.util.Utils;
-
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RadioGroup;
-import android.widget.Toast;
+
+import com.avos.avoscloud.AVUser;
+import com.example.lovetalk.R;
+import com.example.lovetalk.util.MyAsyncTask;
+import com.example.lovetalk.util.Utils;
 
 public class RegisteActivity extends BaseEntryActivity implements OnClickListener,
 		OnFocusChangeListener {
@@ -217,17 +191,6 @@ public class RegisteActivity extends BaseEntryActivity implements OnClickListene
 		new MyAsyncTask(this) {
 
 			@Override
-			protected void onPost(Exception e) {
-				// TODO Auto-generated method stub
-				if (e != null) {
-					Utils.toast(context, "注册失败:" + e.getMessage());
-				} else {
-					Utils.toast(context, "注册成功");
-					HomeActivity.goHomeActivity(RegisteActivity.this);
-				}
-			}
-
-			@Override
 			protected void doInBack() throws Exception {
 				// TODO Auto-generated method stub
 				String username = usernametext.getText().toString();
@@ -251,6 +214,12 @@ public class RegisteActivity extends BaseEntryActivity implements OnClickListene
 				user.put("mobilePhoneNumber", mobile);
 				user.put("MacAddress", MyAddress);
 				user.signUp();
+			}
+
+			@Override
+			protected void onSucceed() {
+				Utils.toast("注册成功");
+				HomeActivity.goHomeActivity(RegisteActivity.this);
 			}
 		}.execute();
 	}

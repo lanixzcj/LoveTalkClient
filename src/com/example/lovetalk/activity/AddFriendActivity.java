@@ -82,7 +82,7 @@ public class AddFriendActivity extends BaseActivity implements OnClickListener, 
 				stopLoadMore();
 				if (e != null) {
 					e.printStackTrace();
-					Utils.toast(mContext, "网络错误");
+					Utils.toast("网络错误");
 				} else {
 					Utils.handleListResult(mListView, mAdapter, users);
 				}

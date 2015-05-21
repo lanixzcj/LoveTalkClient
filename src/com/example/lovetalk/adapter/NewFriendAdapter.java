@@ -9,18 +9,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
-import java.util.List;
-
+import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.SaveCallback;
 import com.example.lovetalk.R;
 import com.example.lovetalk.service.AddRequest;
-import com.example.lovetalk.service.CloudService;
+import com.example.lovetalk.service.AddRequestService;
 import com.example.lovetalk.service.UserService;
-import com.example.lovetalk.util.MyAsyncTask;
 import com.example.lovetalk.util.Utils;
 import com.example.lovetalk.view.ViewHolder;
+
+import java.util.List;
 
 public class NewFriendAdapter extends BaseListAdapter<AddRequest> {
 
@@ -78,20 +78,11 @@ public class NewFriendAdapter extends BaseListAdapter<AddRequest> {
 	}
 
 	private void agreeAdd(final Button addBtn, final AddRequest addRequest) {
-		new MyAsyncTask(ctx) {
+		AddRequestService.agreeAddRequest(addRequest, new SaveCallback() {
 			@Override
-			protected void doInBack() throws Exception {
-				CloudService.agreeAddRequest(addRequest.getObjectId());
+			public void done(AVException e) {
+				toAgreedTextView(addBtn);
 			}
-
-			@Override
-			protected void onPost(Exception e) {
-				if (e != null) {
-					Utils.toast(context, e.getMessage());
-				} else {
-					toAgreedTextView(addBtn);
-				}
-			}
-		}.execute();
+		});
 	}
 }

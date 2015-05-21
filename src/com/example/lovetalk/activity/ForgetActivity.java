@@ -81,10 +81,10 @@ public class ForgetActivity extends Activity implements OnClickListener, OnFocus
 			public void done(AVException arg0) {
 				// TODO Auto-generated method stub
 				if (arg0 == null) {
-					Utils.toast(ForgetActivity.this, "发送成功");
+					Utils.toast("发送成功");
 					finish();
 				} else {
-					Utils.toast(ForgetActivity.this, "发送失败:" + arg0.getMessage());
+					Utils.toast("发送失败:" + arg0.getMessage());
 					log.e("lan", arg0.getMessage());
 				}
 			}

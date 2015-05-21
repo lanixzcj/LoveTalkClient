@@ -6,10 +6,10 @@ import android.media.MediaPlayer;
 import android.util.AttributeSet;
 import android.view.View;
 
-import java.io.IOException;
-
 import com.example.lovetalk.R;
 import com.example.lovetalk.util.Utils;
+
+import java.io.IOException;
 
 /**
  * Created by lzw on 14-9-22.
@@ -70,7 +70,7 @@ public class PlayButton extends View implements View.OnClickListener {
 				prepared = true;
 			} catch (IOException e) {
 				e.printStackTrace();
-				Utils.toast(ctx, e.getMessage());
+				Utils.toast(e.getMessage());
 			}
 		} else {
 			mediaPlayer.start();

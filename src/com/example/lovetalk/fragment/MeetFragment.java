@@ -18,7 +18,6 @@ import com.example.lovetalk.adapter.MeetAdapter;
 import com.example.lovetalk.enity.MeetingInfo;
 import com.example.lovetalk.service.UserService;
 import com.example.lovetalk.util.MyAsyncTask;
-import com.example.lovetalk.util.Utils;
 
 import java.util.List;
 
@@ -82,18 +81,14 @@ public class MeetFragment extends BaseFragment implements
 			}
 
 			@Override
-			protected void onPost(Exception e) {
-				if (e != null) {
-					e.printStackTrace();
-					Utils.toast(context, "网络错误");
-				} else {
-					for (AVObject meeting : meets) {
-						MeetingInfo.addMeeting(meeting);
-					}
-					Adapter = new MeetAdapter(context, MeetingInfo.getList());
-					listView.setAdapter(Adapter);
+			protected void onSucceed() {
+				for (AVObject meeting : meets) {
+					MeetingInfo.addMeeting(meeting);
 				}
+				Adapter = new MeetAdapter(context, MeetingInfo.getList());
+				listView.setAdapter(Adapter);
 			}
+
 		}.execute();
 	}
 

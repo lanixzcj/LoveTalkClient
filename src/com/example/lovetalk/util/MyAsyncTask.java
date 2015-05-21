@@ -60,7 +60,18 @@ public abstract class MyAsyncTask extends AsyncTask<Void, Void, Void> {
 		onPost(exception);
 	}
 
-	protected abstract void doInBack() throws Exception;
 
-	protected abstract void onPost(Exception e);
+
+	protected void onPost(Exception e) {
+		if (e != null) {
+			e.printStackTrace();
+			Utils.toast(e.getMessage());
+			//Utils.toast(ctx, R.string.pleaseCheckNetwork);
+		} else {
+			onSucceed();
+		}
+	}
+
+	protected abstract void doInBack() throws Exception;
+	protected abstract void onSucceed();
 }
