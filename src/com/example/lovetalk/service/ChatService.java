@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.alibaba.fastjson.JSONException;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVMessage;
 import com.avos.avoscloud.AVUser;
@@ -75,7 +74,7 @@ public class ChatService {
 
 	public static void openSession(Activity activity) {
 		Session session = getSession();
-		session.setSignatureFactory(new SignatureFactory());
+//		session.setSignatureFactory(new SignatureFactory());
 		if (session.isOpen() == false) {
 			session.open(new LinkedList<String>());
 		}
@@ -120,7 +119,7 @@ public class ChatService {
 		return getSession().getGroup(groupId);
 	}
 
-	public static void notifyMsg(Context context, Msg msg, Group group) throws JSONException {
+	public static void notifyMsg(Context context, Msg msg, Group group) throws Exception {
 		int icon = context.getApplicationInfo().icon;
 		Intent intent;
 		if (group == null) {

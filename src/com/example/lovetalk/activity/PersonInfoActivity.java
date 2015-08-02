@@ -114,7 +114,7 @@ public class PersonInfoActivity extends BaseActivity implements OnClickListener 
 					addFriendBtn.setVisibility(View.VISIBLE);
 					addFriendBtn.setOnClickListener(this);
 				}
-			} catch (AVException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 

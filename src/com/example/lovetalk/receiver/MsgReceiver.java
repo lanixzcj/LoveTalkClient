@@ -120,6 +120,11 @@ public class MsgReceiver extends AVMessageReceiver {
 		//ChatService.onMessageError(throwable, msgListeners);
 	}
 
+	@Override
+	public void onSessionClose(Context context, Session session) {
+
+	}
+
 	public static void registerStatusListener(StatusListener listener) {
 		statusListener = listener;
 	}

@@ -231,7 +231,7 @@ public class ContactFragment extends BaseFragment implements
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 							long arg3) {
 		//TODO Auto-generated method stub
-		AVUser user = (AVUser) userAdapter.getItem(position - 1);
+		AVUser user = (AVUser) arg0.getAdapter().getItem(position);
 		ChatActivity.goUserChat(getActivity(), user.getObjectId());
 	}
 

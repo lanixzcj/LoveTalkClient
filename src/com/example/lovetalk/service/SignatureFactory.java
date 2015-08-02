@@ -40,4 +40,9 @@ public class SignatureFactory implements com.avos.avoscloud.SignatureFactory {
 		return null;
 	}
 
+	@Override
+	public Signature createConversationSignature(String s, String s1, List<String> list, String s2) throws SignatureException {
+		return null;
+	}
+
 }

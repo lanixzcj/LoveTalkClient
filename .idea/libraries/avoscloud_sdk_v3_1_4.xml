@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="avoscloud-v2.6.9">
+  <library name="avoscloud-sdk-v3.1.4">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/libs/avoscloud-v2.6.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/avoscloud-sdk-v3.1.4.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

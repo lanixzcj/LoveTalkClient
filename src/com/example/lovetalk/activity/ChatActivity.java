@@ -294,8 +294,14 @@ public class ChatActivity extends BaseActivity implements OnClickListener, MsgLi
 		if (roomType == RoomType.Single) {
 			String chatUserId = intent.getStringExtra(CHAT_USER_ID);
 			chatUser = DemoApplication.lookupUser(chatUserId);
-			ChatService.withUserToWatch(chatUser, true);
-			msgAgent = new MsgAgent(roomType, chatUser.getObjectId());
+			if (chatUser != null) {
+				ChatService.withUserToWatch(chatUser, true);
+				msgAgent = new MsgAgent(roomType, chatUser.getObjectId());
+			} else {
+				Log.d("test1", chatUserId);
+			}
+
+
 		} else {
 //      String groupId = intent.getStringExtra(GROUP_ID);
 //      Session session = ChatService.getSession();
