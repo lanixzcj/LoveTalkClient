@@ -130,33 +130,22 @@ public class UserService {
 //  }
 //
     public static List<AVObject> findMeetPeople() throws AVException {
+        List<AVObject> allMeetInfo = new ArrayList<>();
         AVUser user = AVUser.getCurrentUser();
         AVRelation<AVObject> relation = user.getRelation("MeetingInfo");
         AVQuery<AVObject> query = relation.getQuery();
         query.whereExists("YourUser");
         query.include("YourUser");
         query.setCachePolicy(AVQuery.CachePolicy.NETWORK_ELSE_CACHE);
-//		query.findInBackground(new FindCallback<AVObject>() {
-//			@Override
-//			public void done(List<AVObject> arg0, AVException arg1) {
-//				// TODO Auto-generated method stub
-//				if(arg1 == null){
-//					List<HashMap<String, Object>> list = new ArrayList<HashMap<String,Object>>();
-//					for(AVObject meeting:arg0){
-//						MeetingInfo.addMeeting(meeting);
-//					}
-//					
-//					for(HashMap<String, Object> meeting:MeetingInfo.getList()){
-//						AVUser user = (AVUser)meeting.get("user");
-//						Log.d("lan", user.getUsername());
-//						Log.d("lan", meeting.get("times").toString());
-//					}
-//					Adapter = new MeetAdapter(context, MeetingInfo.getList());
-//					listView.setAdapter(Adapter);
-//				}
-//			}
-//		});
-        return query.find();
+        query.setLimit(1000);
+        int count = query.count();
+
+        for (int i = 0;i < count / 1000f + 1;i++) {
+            query.skip(1000 * i);
+            allMeetInfo.addAll(query.find());
+        }
+
+        return allMeetInfo;
 
     }
 

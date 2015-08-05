@@ -21,6 +21,7 @@ import com.example.lovetalk.adapter.MeetActivityAdapter;
 import com.example.lovetalk.service.UserService;
 import com.example.lovetalk.util.MyAsyncTask;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MeetActivity extends BaseActivity {
@@ -58,7 +59,7 @@ public class MeetActivity extends BaseActivity {
 
 	private void refresh() {
 		new MyAsyncTask(mContext) {
-			List<AVObject> meet;
+			List<AVObject> meet = new ArrayList<AVObject>();
 
 			@Override
 			protected void doInBack() throws Exception {
@@ -72,7 +73,15 @@ public class MeetActivity extends BaseActivity {
 				query.include("YourUser");
 				query.orderByDescending("Time");
 				query.setCachePolicy(AVQuery.CachePolicy.NETWORK_ELSE_CACHE);
-				meet = query.find();
+
+				query.setCachePolicy(AVQuery.CachePolicy.NETWORK_ELSE_CACHE);
+				query.setLimit(1000);
+				int count = query.count();
+
+				for (int i = 0;i < count / 1000f + 1;i++) {
+					query.skip(1000 * i);
+					meet.addAll(query.find());
+				}
 			}
 
 			@Override

@@ -13,12 +13,14 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVUser;
 import com.example.lovetalk.R;
 import com.example.lovetalk.adapter.MeetAdapter;
 import com.example.lovetalk.enity.MeetingInfo;
 import com.example.lovetalk.service.UserService;
 import com.example.lovetalk.util.MyAsyncTask;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -30,14 +32,15 @@ public class MeetFragment extends BaseFragment implements
 	GridView listView;
 	MeetAdapter Adapter;
 	UpdateReceiver update;
+	private HashMap<String, MeetInfo> meetInfoHashMap = new HashMap<>();
 	String updateAction = "com.example.lovetalk.update";
 
 
 	public class UpdateReceiver extends BroadcastReceiver {
 		@Override
 		public void onReceive(Context context, Intent intent) {
+            Log.d("lan", "更新");
 			// TODO Auto-generated method stub
-			Log.d("lan", "更新");
 			String action = intent.getAction();
 			if (action.equals(updateAction)) {
 				if (Adapter != null) {
@@ -72,7 +75,7 @@ public class MeetFragment extends BaseFragment implements
 	}
 
 	private void findMeetPeople() {
-		new MyAsyncTask(context, false) {
+		new MyAsyncTask(context, true) {
 			List<AVObject> meets;
 
 			@Override
@@ -92,9 +95,8 @@ public class MeetFragment extends BaseFragment implements
 		}.execute();
 	}
 
-	public void onRefresh() {
-		// TODO Auto-generated method stub
-		MeetingInfo.Clear();
+	public void onRefresh() {		// TODO Auto-generated method stub
+		meetInfoHashMap.clear();
 		findMeetPeople();
 	}
 
@@ -118,6 +120,50 @@ public class MeetFragment extends BaseFragment implements
 		// TODO Auto-generated method stub
 		super.onResume();
 
+	}
+
+    private void addMeet(AVObject meet) {
+        String objectId = meet.getObjectId();
+        MeetInfo meetInfo = meetInfoHashMap.get(objectId);
+
+        if (meetInfo != null) {
+            meetInfo.addTimes();
+        } else {
+            AVUser user = meet.getAVUser("YourUser");
+            meetInfo = new MeetInfo(user.getUsername(), 1);
+        }
+
+        meetInfoHashMap.put(objectId, meetInfo);
+    }
+
+	private class MeetInfo {
+		private String userName = "";
+		private int times = 0;
+
+		public MeetInfo(String name, int times) {
+			userName = name;
+			this.times = times;
+		}
+
+		public void setUserName(String name) {
+			userName = name;
+		}
+
+		public String getUserName() {
+			return userName;
+		}
+
+		public void setTimes(int times) {
+			this.times = times;
+		}
+
+		public int getTimes() {
+			return times;
+		}
+
+        public void addTimes() {
+            times++;
+        }
 	}
 
 

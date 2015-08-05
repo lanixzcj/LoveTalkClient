@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Java-WebSocket-1.2.0-leancloud">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/Java-WebSocket-1.2.0-leancloud.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

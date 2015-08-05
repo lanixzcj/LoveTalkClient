@@ -208,7 +208,7 @@ public class ContactFragment extends BaseFragment implements
 	}
 
 	public void refresh() {
-		new MyAsyncTask(context, false) {
+		new MyAsyncTask(context, true) {
 			boolean haveAddRequest;
 			List<AVUser> friends;
 

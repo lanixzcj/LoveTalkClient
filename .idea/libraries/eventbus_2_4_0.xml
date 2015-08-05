@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="avosstatistics-v2.6.9">
+  <library name="eventbus-2.4.0">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/libs/avosstatistics-v2.6.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/eventbus-2.4.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
